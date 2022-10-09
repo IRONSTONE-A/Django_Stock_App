@@ -10,7 +10,8 @@ from .models import(
 
 from.serilaizers import (
     CategorySerializer,
-    BrandSerializer
+    BrandSerializer,
+    ProductSerializer
 )
 
 class CategoryView(viewsets.ModelViewSet):
@@ -24,3 +25,8 @@ class BrandView(viewsets.ModelViewSet):
     serializer_class = BrandSerializer
     filter_backends =[filters.SearchFilter]
     search_fields = ["name"]
+    
+class ProductView(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    
