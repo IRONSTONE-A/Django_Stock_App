@@ -25,7 +25,7 @@ class Brand(models.Model):
 class Product(UpdateCreate):
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, releted_name="b_products")
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name="b_products")
     stock = models.SmallIntegerField(blank=True, null=True)
     
     def __str__(self):
@@ -47,11 +47,11 @@ class Transaction(UpdateCreate):
     
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     firm = models.ForeignKey(Firm, on_delete=models.SET_NULL, null=True, related_name="transactions")
-    transaction = models.SmallIntegerField(vhoices=TRANSACTION)
+    transaction = models.SmallIntegerField(choices=TRANSACTION)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="transaction")
     quantity = models.SmallIntegerField()
-    price = models.DecimalField(max_digit=6, decimal_places=2)
-    price_total = models.DecimalField(max_digit=8, decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price_total = models.DecimalField(max_digits=8, decimal_places=2, blank=True)
     
     def __str__(self):
         return f"{self.transaction}-{self.product}-{self.quantity}"
